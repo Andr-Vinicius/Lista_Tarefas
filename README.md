@@ -8,5 +8,9 @@
   <li>Entrar na pasta pelo terminal (ou VSCode)</li>
   <li>Executar o comando: npm start</li>
 </ul>
+<br>
 
-
+<center>
+<p align="center">Interface da lista de tarefas</p>
+<img src="public/Lista de tarefas - Opera.jpg"></img>
+</center>
