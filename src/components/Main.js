@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 
+import Form from './Form';
+import Tarefas from './Tarefas';
+
 // div principal
 import './Main.css';
 
-// Formulário
-import {FaPlus} from 'react-icons/fa'
-
-// Tarefas
-import {FaEdit, FaWindowClose} from 'react-icons/fa'
 
 // Um componente que teme estado
 export default class Main extends Component {
@@ -73,6 +71,21 @@ export default class Main extends Component {
     });
   }
 
+  componentDidMount(){
+    const tarefas = JSON.parse(localStorage.getItem('tarefas'));
+    if(!tarefas) return;
+
+    this.setState({tarefas});
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    const {tarefas} = this.state;
+
+    if(tarefas === prevState.tarefas) return;
+    console.log('As tarefas mudaram', tarefas);
+
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+  }
 
 
   render(){
@@ -82,29 +95,17 @@ export default class Main extends Component {
       <div className='main'>
         <h1>Lista de tarefas</h1>
 
-        <form onSubmit={this.handleSubmit} action='#' className='form'>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            value={novaTarefa}
-          />
-          <button type='submit'>
-            <FaPlus />
-          </button>
-        </form>
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          novaTarefa={novaTarefa}
+        />
+        <Tarefas
+          handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
+          tarefas={tarefas}
+        />
 
-        <ul className='tarefas'>
-          {
-            tarefas.map((tarefa, index)=> (
-              <li key={tarefa}>{tarefa}
-              <div>
-                <button onClick={(e) => this.handleEdit(e, index)} type='submit'><FaEdit /></button>
-                <button onClick={(e) => this.handleDelete(e, index)} type='submit'><FaWindowClose /></button>
-              </div>
-              </li>
-            ))
-          }
-        </ul>
       </div>
     )
   }

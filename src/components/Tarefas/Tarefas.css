@@ -1,0 +1,25 @@
+.tarefas li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.tarefas li:hover{
+  background-color: #485F73;
+  color: white;
+}
+
+.tarefas button[type="submit"]{
+  margin: 5px;
+  border: none;
+  height: 30px;
+  width: 30px;
+  background-color: #163840;
+  color: #fff;
+}
+
+.tarefas button[type="submit"]:hover{
+  background-color: #80BF9B;
+  cursor: pointer;
+}
